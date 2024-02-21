@@ -1,0 +1,15 @@
+body {
+    background-color: aquamarine;
+}
+
+@media (max-width: 768) {
+    body {
+        background-color: black;
+    }
+}
+
+@media (max-width: 768) {
+    body {
+        color: black;
+    }
+}
