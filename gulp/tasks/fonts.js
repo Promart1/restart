@@ -43,10 +43,44 @@ export const fontsStyle = () => {
                 for (var i = 0; i < fontsFiles.length; i++) {
                     let fontFileName = fontsFiles[i].split('.')[0];
                     if (newFileOnly !== fontFileName) {
-                        let fontName = fontFileName.split('-')[0]
+                        let fontName = fontFileName.split('-')[0] ? fontFileName.split('-')[0] : fontFileName;
+                        let fontWeight = fontFileName.split('-')[1] ? fontFileName.split('-')[1] : fontFileName;
+                        if (fontWeight.toLowerCase() === 'thin') {
+                            fontWeight = 100;
+                        } else if (fontWeight.toLowerCase() === 'extralight') {
+                            fontWeight = 200;
+                        } else if (fontWeight.toLowerCase() === 'light') {
+                            fontWeight = 300;
+                        } else if (fontWeight.toLowerCase() === 'medium') {
+                            fontWeight = 500;
+                        } else if (fontWeight.toLowerCase() === 'semibold') {
+                            fontWeight = 600;
+                        } else if (fontWeight.toLowerCase() === 'bold') {
+                            fontWeight = 700;
+                        } else if (fontWeight.toLowerCase() === 'extrabold' || fontWeight, toLowerCase() === 'heavy') {
+                            fontWeight = 800;
+                        } else if (fontWeight.toLowerCase() === 'black') {
+                            fontWeight = 900;
+                        } else {
+                            fontWeight = 400;
+                        }
+                        fs.appendFile(fontsFile,
+                            `@font-face {
+                            font-famoly: ${fontName};
+                            font-display: swap;
+                            font-weight: ${fontWeight};
+                            font-style: normal;
+
+                        }\r\n`, cd);
+                        newFileOnly = fontFileName;
                     }
                 }
+            } else {
+                console.log("File exists");
             }
         }
-    })
+    });
+
+    return app.gulp.src(`${app.path.srcFolder}`);
+    function cd() {}
 }
